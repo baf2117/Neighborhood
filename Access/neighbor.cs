@@ -4,23 +4,10 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.Globalization;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
-using System.Text;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Linq;
 using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace neighborhood
 {
@@ -43,13 +30,6 @@ namespace neighborhood
         {
             _RepositoryVisits = repositoryVisits;
             _RepositoryProfile = repositoryProfile;
-            bloburl = configuration.GetValue<string>("storage");
-            blobname = configuration.GetValue<string>("storageblob");
-            PublicKey = configuration.GetValue<string>("PublicKey");
-            PrivateKey = configuration.GetValue<string>("PrivateKey");
-            twiliouser = configuration.GetValue<string>("TwilioUserName");
-            twiliopassword = configuration.GetValue<string>("TwilioPassword");
-            twilionumber = configuration.GetValue<string>("TwilioNumber");
             baseUrl = configuration.GetValue<string>("baseUrl");
             _RazorViewToStringRenderer = razorViewToStringRenderer;
         }
@@ -70,7 +50,8 @@ namespace neighborhood
                     Date = visit.Date.ToShortDateString(),
                     Phone = visit.Phone,
                     Name = visit.Name,
-                    Address = visit.Profile.Address
+                    Address = visit.Profile.Address,
+                    Url = baseUrl + "/api/visits/" + visit.Id
                 };
 
                 var htmlContent = await _RazorViewToStringRenderer.RenderViewToStringAsync(templateModel);

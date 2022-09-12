@@ -10,11 +10,12 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
     <link rel="icon" href="https://catalogstore.blob.core.windows.net/logo/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <link rel="stylesheet" href="https://catalogstore.blob.core.windows.net/logo/Style/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <style>
         inputstyle {
             background-color: white;
@@ -23,6 +24,11 @@
             height: 2.7rem;
             width: 100%;
             padding-inline-start: 1.5em;
+        }
+
+        .qr-code {
+            max-width: 200px;
+            margin: 10px;
         }
     </style>
 </head>
@@ -77,8 +83,15 @@
                     <div class="col-12">
                         <div class="textOnInput">
                             <label for="inputText">Fecha</label>
-                            <input type="text" required class="inputstyle" id="Phone" name="Phone" readonly value="@Model.Date">
+                            <input type="text" required class="inputstyle" id="Phone" name="Phone" readonly
+                                value="@Model.Date">
                         </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="text-center">
+                        <img src="https://chart.googleapis.com/chart?cht=qr&chl=Hello+World&chs=160x160&chld=L|0"
+                            class="qr-code img-thumbnail img-responsive" />
                     </div>
                 </div>
             </div>
@@ -119,7 +132,8 @@
                     <div class="col-10">
                         <div class="textOnInput">
                             <label for="inputText">Dirección</label>
-                            <input class="inputstyle" id="Address" name="Address" type="text" readonly value="@Model.Address">
+                            <input class="inputstyle" id="Address" name="Address" type="text" readonly
+                                value="@Model.Address">
                         </div>
                     </div>
                 </div>
@@ -141,16 +155,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="container-fluid">
+                    <div class="text-center">
+                        <img src="https://chart.googleapis.com/chart?cht=qr&chl=Hello+World&chs=160x160&chld=L|0"
+                            class="qr-code img-thumbnail img-responsive" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
+
+        function htmlEncode(value) {
+            return $('<div/>').text(value)
+                .html();
+        }
+
         function after() {
             var height = window.innerHeight;
             var size = "height:" + height + "px";
             document.getElementById("imagediv").setAttribute("style", size);
             document.getElementById("resumediv").setAttribute("style", size);
             document.getElementById("mobilediv").setAttribute("style", size);
+
+            let finalURL =
+                'https://chart.googleapis.com/chart?cht=qr&chl=' +
+                '@Model.Url' + '&chs=160x160&chld=L|0'
+
+            $('.qr-code').attr('src', finalURL);
         };
+    </script>
+    <script>
+
     </script>
 </body>
