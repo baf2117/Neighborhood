@@ -1,0 +1,250 @@
+
+    body {
+      font-family: "Comfortaa", sans-serif;
+      background-color: #EFEFEF;
+    }
+
+    #number-container,
+    #securityCode-container {
+      height: 38px;
+    }
+
+    .flex-microform-focused {
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    }
+    .containerbox {
+      border: 2px solid #FFFFFF;
+      border-radius: 12px;
+      background-color: white;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+      box-shadow: none !important;
+    }
+
+
+    .numberstyle {
+      background-color: white;
+      border-radius: 9px;
+      height: 3rem;
+    }
+
+    .description {
+      font-size: 72%;
+      font-weight: bold;
+      display: inline-block;
+      color: #828282;
+      margin-left: 4%;
+      margin-right: 4%;
+      line-height: 163%;
+      margin-top: 3%;
+      margin-bottom: 2rem;
+    }
+
+    .mobile_device_900px {
+      display: none;
+    }
+
+    @media only screen and (max-device-width: 900px) {
+      .mobile_device_900px {
+        display: block;
+      }
+
+      .desktop {
+        display: none;
+      }
+    }
+
+
+    .label-style {
+      font-weight: bold;
+      color: #1c1855;
+      font-size: 1.3em;
+      margin-top: 1rem;
+      margin-left: 1.5rem;
+    }
+
+    form {
+      background-color: white;
+    }
+
+    .stylequantity {
+      height: 100%;
+      font-size: 1.5rem;
+      width: 100%;
+    }
+
+    .inputstyle {
+      background-color: white;
+      border: 2px solid #EFEFEF;
+      border-radius: 7px;
+      height: 2.7rem;
+      width: 100%;
+      padding-inline-start: 1.5em;
+  }
+
+    .textOnInput {
+      position: relative;
+      margin-left: 0.8rem;
+      margin-right: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .textOnInput label {
+      position: absolute;
+      top: -0.7rem;
+      left: 1.5rem;
+      padding: 0.1rem;
+      z-index: 1;
+      color: '#80dbff';
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .textOnInput label:after {
+      content: " ";
+      background-color: #fff;
+      width: 100%;
+      height: 1rem;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: -1;
+      color: '#80dbff';
+    }
+
+    label {
+      font-size: 0.7rem;
+      font-weight: 1rem;
+      display: inline-block;
+      margin-bottom: .5rem;
+      color: '#80dbff';
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    *:focus {
+        outline: 0 !important;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .labelfile {
+        border-radius: 7px;
+        background-image: repeating-linear-gradient(to right, #1c1855 0%, #1c1855 50%, transparent 50%, transparent 100%), repeating-linear-gradient(to right, #1c1855 0%, #1c1855 50%, transparent 50%, transparent 100%), repeating-linear-gradient(to bottom, #1c1855 0%, #1c1855 50%, transparent 50%, transparent 100%), repeating-linear-gradient(to bottom, #1c1855 0%, #1c1855 50%, transparent 50%, transparent 100%);
+        background-position: left top, left bottom, left top, right top;
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+        background-size: 1em 0.1em, 1em 0.1em, 0.1em 1em, 0.15em 1em;
+        background-color: #f8f8f8;
+        font-size: 1rem;
+        font-weight: 1rem;
+        color: '#80dbff';
+        width: 100%;
+        height: 6rem;
+        margin-top: 2rem;
+        padding: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    #wiretransfermobile {
+        opacity: 0;
+        z-index: -1;
+    }
+
+    #wiretransferdesk {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .popup .popuptext {
+        visibility: hidden;
+        width: 10rem;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+    }
+    .popup .popuptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+    /* Toggle this class - hide and show the popup */
+    .popup .show {
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    @-webkit-keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframesfadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .pickup-points-map {
+        min-width: 100%;
+        padding: 10px;
+        border: 1px solid #d0d0d0;
+        margin: auto;
+    }
+
+    .pickup-points-map2 {
+        min-width: 100%;
+        padding: 10px;
+        border: 1px solid #d0d0d0;
+        margin: auto;
+    }

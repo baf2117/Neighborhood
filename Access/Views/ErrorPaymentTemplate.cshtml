@@ -1,0 +1,126 @@
+@model neighborhood.Views.ErrorPaymentTemplateModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Shoppeira Links</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+    <link rel="icon" href="https://catalogstore.blob.core.windows.net/logo/favicon.ico">
+    <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <style>
+        body {
+            font-family: "Comfortaa", sans-serif;
+            background-color: #FFFFFF;
+        }
+
+        #number-container,
+        #securityCode-container {
+            height: 38px;
+        }
+
+        .flex-microform-focused {
+            background-color: #fff;
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+        }
+
+        .label-style {
+            font-weight: bold;
+            color: #1c1855;
+            font-size: 1.6rem;
+            margin-top: 5rem;
+        }
+
+        .containerbox {
+            border-radius: 7px;
+            background-color: white;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+        }
+
+        .inputstyle {
+            background-color: white;
+            border: 2px solid #EFEFEF;
+            border-radius: 7px;
+            height: 2.3rem;
+            width: 80%;
+            padding-inline-start: 1.5em;
+        }
+
+
+
+        label {
+            font-size: 2rem;
+            font-weight: 1rem;
+            display: inline-block;
+            margin-bottom: .5rem;
+            color: '#80dbff';
+        }
+
+        button {
+            background: linear-gradient(45deg, #6D00E6 50%, #5300E3 90%);
+            color: white;
+            border: 2px solid #EFEFEF;
+            border-radius: 7px;
+            border-color: white;
+        }
+
+        .form-control {
+            box-shadow: none !important;
+
+        }
+
+        img {
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style="margin-top: 2rem;">
+            <img src="https://catalogstore.blob.core.windows.net/logo/logolinks.png" height="100%" width="30%" />
+        </div>
+        <div class="row containerbox" style="height:22rem;">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <label class="label-style">¡Oops! Algo pasó</label>
+                    </div>
+                </div>
+                <lord-icon 
+                    src="https://cdn.lordicon.com/dzllstvg.json" 
+                    trigger="loop"
+                    colors="primary:#1c1855,secondary:#5300e3" 
+                    style="width:250px;height:250px">
+                </lord-icon>
+                <div class="row">
+                    <div class="col-12" style="margin-top: 4rem; font-size: 0.8rem; color:#5300E3;">
+                        <span style="color:#1c1855;"> Hubo un problema para</span>
+                        <span style="color:#5300E3;"> procesar tu pago</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="font-size: 0.8rem; color:#5300E3;">
+                        <span style="color:#1c1855;"> Por favor  </span>
+                        <span style="color:#5300E3;"> infórmale al vendedor </span>
+                        <span style="color:#1c1855;"> del error </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="font-size: 0.8rem; color:#5300E3;">
+                        <span style="color:#5300E3;">@Model.Message</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

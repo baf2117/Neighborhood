@@ -1,0 +1,13 @@
+{
+    "version": "2.0",
+    "logging": {
+        "fileLoggingMode": "always",
+        "logLevel": {
+            "Function": "Trace",
+            "default": "Trace"
+        },
+        "console": {
+            "isEnabled": "true"
+        }
+    }
+}

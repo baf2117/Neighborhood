@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+html, body {
+  height: 100%;
+}
+
+.centered {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+th, td{
+  color :red
+}
+
+@font-face {
+  font-family: 'Gothic';
+  src: local('Gothic'), url(./fonts/Gothic/Gothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'ExtraBoldGothic';
+  src: local('ExtraBoldGothic'), url(./fonts/ExtraBoldGothic/ExtraBoldGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'BoldGothic';
+  src: local('BoldGothic'), url(./fonts/BoldGothic/BoldGothic-Regular.ttf) format('truetype');
+}
+
+
+::-webkit-input-placeholder { /* Chrome */
+  color: '#EFEFEF';
+  font-size: 0.85em;
+}
+
+.btn {
+  text-transform: unset !important;
+}
+
+*:focus {
+  outline: none;
+}

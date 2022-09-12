@@ -1,0 +1,156 @@
+@model neighborhood.Views.AccessInfoTemplateModel
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <title>Vecindario</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+    <link rel="icon" href="https://catalogstore.blob.core.windows.net/logo/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <link rel="stylesheet" href="https://catalogstore.blob.core.windows.net/logo/Style/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <style>
+        inputstyle {
+            background-color: white;
+            border: 2px solid #EFEFEF;
+            border-radius: 7px;
+            height: 2.7rem;
+            width: 100%;
+            padding-inline-start: 1.5em;
+        }
+    </style>
+</head>
+
+<body onload="after()">
+    <div class="container" style="margin:0;max-width: unset;background-color: white;">
+        <div style="display: none" id="loadingpaymobile">
+            <img src="https://catalogstore.blob.core.windows.net/logo/blanco2.png" style="width:100%;height:8%" />
+        </div>
+        <div class="row mobile_device_900px">
+            <div class="col" id="mobilediv">
+                <div class="row" style="text-align: center; height:7%;">
+                    <div class="col-12">
+                        <p class="title">Datos de Visita</p>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%; height:10%;">
+                    <div class="col-12">
+                        <div class="textOnInput">
+                            <label for="inputText">Nombre</label>
+                            <input class="inputstyle" id="Name" name="Name" type="text" readonly value="@Model.Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%;">
+                    <div class="col-12">
+                        <div class="textOnInput">
+                            <label for="inputText">DPI</label>
+                            <input class="inputstyle" id="DPI" name="DPI" type="text" readonly value="@Model.DPI">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%;">
+                    <div class="col-12">
+                        <div class="textOnInput">
+                            <label for="inputText">Dirección*</label>
+                            <input class="inputstyle" id="Address" name="Address" type="text" readonly
+                                value="@Model.Address">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%;">
+                    <div class="col-12">
+                        <div class="textOnInput">
+                            <label for="inputText">Teléfono</label>
+                            <input type="text" required class="inputstyle" id="Phone" name="Phone" readonly
+                                value="@Model.Phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%;">
+                    <div class="col-12">
+                        <div class="textOnInput">
+                            <label for="inputText">Fecha</label>
+                            <input type="text" required class="inputstyle" id="Phone" name="Phone" readonly value="@Model.Date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desktop row">
+            <div class="col-6" style="margin:0; padding:0;">
+                <img id="imagediv" src="https://catalogstore.blob.core.windows.net/logo/Imagen%20recortada.png"
+                    width="100%" style="display: block; margin: auto;">
+                <img id="imagediv" src="https://catalogstore.blob.core.windows.net/logo/logoblanco.png" width="30%"
+                    style="position: absolute; top: 10px; left: 10px;">
+            </div>
+            <div class="col-6" id="resumediv">
+                <div class="row" style="text-align: center; height:7%;">
+                    <div class="col-12">
+                        <p class="title">Datos de Visita</p>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="textOnInput">
+                            <label for="inputText">Nombre</label>
+                            <input class="inputstyle" id="Name" name="Name" type="text" readonly value="@Model.Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%;">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="textOnInput">
+                            <label for="inputText">DPI</label>
+                            <input class="inputstyle" id="DPI" name="DPI" type="text" readonly value="@Model.DPI">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="textOnInput">
+                            <label for="inputText">Dirección</label>
+                            <input class="inputstyle" id="Address" name="Address" type="text" readonly value="@Model.Address">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="textOnInput">
+                            <label for="inputText">Teléfono</label>
+                            <input type="text" class="inputstyle" id="phone" name="phone" readonly value="@Model.Phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:0;padding:0;width:100%;height:10%">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div class="textOnInput">
+                            <label for="inputText">Fecha</label>
+                            <input type="text" class="inputstyle" id="date" name="date" readonly value="@Model.Date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function after() {
+            var height = window.innerHeight;
+            var size = "height:" + height + "px";
+            document.getElementById("imagediv").setAttribute("style", size);
+            document.getElementById("resumediv").setAttribute("style", size);
+            document.getElementById("mobilediv").setAttribute("style", size);
+        };
+    </script>
+</body>
