@@ -2,6 +2,7 @@ namespace neighborhood
 {
     using System;
     using System.Linq;
+    using Microsoft.EntityFrameworkCore;
 
     class NotificationsRepository : IRepository<Notifications>
     {
@@ -13,7 +14,10 @@ namespace neighborhood
 
         public Notifications GetById(Guid id)
         {
-            return _Context.Notifications.Where(record => record.Id == id).FirstOrDefault();
+            return _Context.Notifications
+                .Where(record => record.Id == id)
+                .Include(x => x.Profile)
+                .FirstOrDefault();
         }
 
         public IQueryable<Notifications> Get()

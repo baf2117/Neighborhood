@@ -60,7 +60,6 @@
       }
     }
 
-
     .label-style {
       font-weight: bold;
       color: #1c1855;
@@ -97,11 +96,11 @@
 
     .textOnInput label {
       position: absolute;
-      top: -0.7rem;
+      top: -0.9rem;
       left: 1.5rem;
       padding: 0.1rem;
       z-index: 1;
-      color: '#80dbff';
+      color: black;
       padding-left: 1rem;
       padding-right: 1rem;
     }
@@ -119,7 +118,7 @@
     }
 
     label {
-      font-size: 0.7rem;
+      font-size: 1.2rem;
       font-weight: 1rem;
       display: inline-block;
       margin-bottom: .5rem;

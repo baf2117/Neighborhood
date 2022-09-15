@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Collections.Generic;
+using Microsoft.Extensions.Primitives;
 
 namespace neighborhood
 {
@@ -49,6 +51,7 @@ namespace neighborhood
                 Address = profile.Address,
                 Email = profile.Email,
                 Enable = flags.Item1,
+                Admin = flags.Item2,
                 Phone = profile.Phone,
                 Name = profile.Name,
                 LastName = profile.LastName
@@ -134,7 +137,7 @@ namespace neighborhood
         }
 
         [FunctionName("profile_update_admin")]
-        public async Task<IActionResult> UpdateProfileAdmin([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "profile/admin/{id}")] HttpRequest req,
+        public async Task<IActionResult> UpdateProfileAdmin([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "profilesadmin/{id}")] HttpRequest req,
             ILogger log, Guid id, ExecutionContext context)
         {
             string body = await new StreamReader(req.Body).ReadToEndAsync();
@@ -158,6 +161,7 @@ namespace neighborhood
             profile.Phone = model.Phone;
 
             flag += model.Enable ? 1 : 0;
+            flag += model.Admin ? 2 : 0;
 
             profile.Flags = flag;
 
@@ -173,6 +177,7 @@ namespace neighborhood
                 Address = profile.Address,
                 Email = profile.Email,
                 Enable = flags.Item1,
+                Admin = flags.Item2,
                 Phone = profile.Phone,
                 Name = profile.Name,
                 LastName = profile.LastName
@@ -183,7 +188,7 @@ namespace neighborhood
 
         [FunctionName("profile_get_admin")]
         public async Task<IActionResult> GetAdmin(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "getadminprofile/{id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "profilesadmin/{id}")] HttpRequest req,
             ILogger log, String id, ExecutionContext context)
         {
             try
@@ -207,6 +212,7 @@ namespace neighborhood
                     Address = profile.Address,
                     Email = profile.Email,
                     Enable = flags.Item1,
+                    Admin = flags.Item2,
                     Phone = profile.Phone,
                     Name = profile.Name,
                     LastName = profile.LastName
@@ -220,9 +226,52 @@ namespace neighborhood
             }
         }
 
+        [FunctionName("profile_getall_admin")]
+        public async Task<IActionResult> GetAllAdmin(
+                   [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "profilesadmin")] HttpRequest req,
+             ILogger log)
+        {
+            try
+            {
+                string rangeQuery = req.Query["range"];
+                var range = rangeQuery.Substring(1, rangeQuery.Length - 2).Split(",");
+                var skip = int.Parse(range[0]);
+                var take = int.Parse(range[1]);
+                var pageSize = (int.Parse(range[1]) - skip) + 1;
+
+                var profiles = _RepositoryProfile.Get()
+                   .OrderByDescending(x => x.Created)
+                   .ToArray();
+
+                int datalength = profiles.Length;
+
+                profiles = profiles
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToArray();
+
+                foreach (var item in profiles)
+                {
+                    item.Created = item.Created.AddHours(-6);
+                }
+
+                IReadOnlyDictionary<string, StringValues> headers = new Dictionary<string, StringValues>
+                {
+                    {"Content-Range", $"range {skip}-{pageSize}/{datalength}"},
+                    {"Access-Control-Expose-Headers", "Content-Range"},
+                };
+
+                return new OkObjectResultWithHeaders(profiles, headers);
+            }
+            catch (Exception e)
+            {
+                return new BadRequestObjectResult(e);
+            }
+        }
+
         public (bool, bool) FlagtoFlags(int flag)
         {
-            int[] flags = new int[1];
+            int[] flags = new int[2];
 
             for (var i = 0; flag > 0; i++)
             {
@@ -230,7 +279,7 @@ namespace neighborhood
                 flag = flag / 2;
             }
 
-            return (flags[0] == 1, false);
+            return (flags[0] == 1, flags[1] == 1);
         }
     }
 }

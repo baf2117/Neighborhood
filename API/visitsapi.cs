@@ -10,12 +10,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using Twilio;
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
 
 namespace neighborhood
 {
@@ -151,31 +148,47 @@ namespace neighborhood
             return new OkObjectResult(visits);
         }
 
-        [FunctionName("visits_get_admin")]
-        public async Task<IActionResult> GetAdmin(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "getadminvisits/{id}")] HttpRequest req,
-            ILogger log, Guid id)
+        [FunctionName("visits_get_alladmin")]
+        public async Task<IActionResult> GetAllAdmin(
+                    [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "visitsadmin")] HttpRequest req,
+                    ILogger log)
         {
-            try
+            string rangeQuery = req.Query["range"];
+            var range = rangeQuery.Substring(1, rangeQuery.Length - 2).Split(",");
+            var skip = int.Parse(range[0]);
+            var take = int.Parse(range[1]);
+            var pageSize = (int.Parse(range[1]) - skip) + 1;
+
+            var visits = await _RepositoryVisits.Get()
+                .Include(x => x.Profile)
+                .OrderByDescending(x => x.Created)
+                .ToArrayAsync();
+
+            int datalength = visits.Length;
+
+            visits = visits
+                .Skip(skip)
+                .Take(pageSize)
+                .ToArray();
+
+            foreach (var item in visits)
             {
-                var visits = _RepositoryVisits.GetById(id);
-
-                if (visits == null)
-                    return new NotFoundResult();
-
-
-                return new OkObjectResult(visits);
+                item.Created = item.Created.AddHours(-6);
             }
-            catch (Exception e)
-            {
-                return new BadRequestObjectResult(e);
-            }
+
+            IReadOnlyDictionary<string, StringValues> headers = new Dictionary<string, StringValues>
+                {
+                    {"Content-Range", $"range {skip}-{pageSize}/{datalength}"},
+                    {"Access-Control-Expose-Headers", "Content-Range"},
+                };
+
+            return new OkObjectResultWithHeaders(visits, headers);
         }
 
         [FunctionName("visits_post")]
         public async Task<ActionResult> Post(
-          [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "visits")] HttpRequest req,
-          ILogger log)
+     [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "visits")] HttpRequest req,
+     ILogger log)
         {
             try
             {
@@ -206,13 +219,8 @@ namespace neighborhood
                 TwilioClient.Init(twiliouser, twiliopassword);
                 try
                 {
-                    /*var messageOptions = new CreateMessageOptions(new PhoneNumber("whatsapp:" + visits.Phone));
-                    messageOptions.From = new PhoneNumber("whatsapp:+14155238886");
-                    messageOptions.Body = "Hello! This is an editable text message. You are free to change it and write whatever you like.";
-
-                    var message = await MessageResource.CreateAsync(messageOptions);*/
                     var result = await Twilio.Rest.Api.V2010.Account.MessageResource.CreateAsync(
-                        body: $"hola {model.Name}, en el siguiente link puedes encontrar tu pase de vista:  {baseUrl}/qr/{visits.Id}",
+                        body: $"hola {model.Name}, en el siguiente link puedes encontrar tu pase de vista:  {baseUrl}/Access/{visits.Id}",
                         from: new Twilio.Types.PhoneNumber(twilionumber),
                         to: new Twilio.Types.PhoneNumber("whatsapp:" + visits.Phone)
                     );
@@ -222,7 +230,7 @@ namespace neighborhood
                         return new BadRequestObjectResult(new { error = "No se ha podido enviar el mensaje al cliente, revise el numero telefónico" });
                     }
 
-                    
+
                     //Console.WriteLine(message.Body);
                 }
                 catch (Exception e)
@@ -243,7 +251,7 @@ namespace neighborhood
 
         public (bool, bool) FlagtoFlags(int flag)
         {
-            int[] flags = new int[1];
+            int[] flags = new int[2];
 
             for (var i = 0; flag > 0; i++)
             {
@@ -251,7 +259,7 @@ namespace neighborhood
                 flag = flag / 2;
             }
 
-            return (flags[0] == 1, false);
+            return (flags[0] == 1, flags[1] == 1);
         }
 
 

@@ -10,6 +10,17 @@ import VisitsList from './Components/Visits/VisitsList';
 import VisitsCreate from './Components/Visits/VisitsCreate';
 import VisitsShow from './Components/Visits/VisitsShow';
 
+import VisitsListAdmin from './Components/VisitsAdmin/VisitsList';
+
+import NotificationsList from './Components/Notifications/NotificationList';
+import NotificationsCreate from './Components/Notifications/NotificationCreate';
+import NotificationsShow from './Components/Notifications/NotificationShow';
+
+import NotificationsListAdmin from './Components/NotificationsAdmin/NotificationList';
+
+import NeighbornList from './Components/AdminProfiles/NeighbornList';
+import NeignbornEdit from './Components/AdminProfiles/NeighbornEdit';
+
 import Profile from './Components/Profile/Profile';
 
 const routes = [
@@ -51,7 +62,11 @@ const App = () => {
   return (
     <Admin appLayout={MyLayout} dataProvider={myDataProvider} customRoutes={routes} >
       <Resource name="visits" list={VisitsList} create={VisitsCreate} show={VisitsShow} />
+      <Resource name="notifications" list={NotificationsList} create={NotificationsCreate} show={NotificationsShow} />
       <Resource name="profile" />
+      <Resource name="profilesadmin" list={NeighbornList} edit={NeignbornEdit} />
+      <Resource name="visitsadmin" list={VisitsListAdmin}/>
+      <Resource name="notificationsadmin" list={NotificationsListAdmin}/>
     </Admin>
   )
 }

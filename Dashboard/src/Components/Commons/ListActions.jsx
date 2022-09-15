@@ -19,7 +19,7 @@ const Create = ({ resource, basePath, classes }) => {
   var width = isSmall ? '7rem' : '7rem';
   var height = isSmall ? '2.5rem' : '2.5rem';
   
-  if (resource === 'clearing')
+  if (resource === 'profilesadmin')
     return (<div></div>)
   else
     return (

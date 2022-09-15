@@ -23,7 +23,7 @@ const useStyles = makeStyles(() =>
 const VisitsList = (props) => {
   const classes = useStyles();
   const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
-
+  
   return (
     <div class="container">
       <div class="row" style={{ marginTop: '2%' }}>
@@ -32,7 +32,7 @@ const VisitsList = (props) => {
             <List empty={false} {...props} style={{ width: '100%' }} actions={<ListActions small={isSmall} />} bulkActionButtons={false} pagination={<PostPagination />}>
               <Datagrid {...props} rowClick="show" optimized style={{ textAlign: 'center' }}>
                 <TextField source="name" style={{ color: 'black', fontFamily: 'Gothic' }} label="Visita" sortable={false} cellClassName={classes.fields} />
-                <TextField source="phone" style={{ color: 'black', fontFamily: 'Gothic' }} label="Telefono" sortable={false} cellClassName={classes.fields} />
+                <TextField source="profile.address" style={{ color: 'black', fontFamily: 'Gothic' }} label="Dirección" sortable={false} cellClassName={classes.fields} />
                 <DateField source="date" style={{ color: 'black', fontFamily: 'Gothic' }} label="Fecha" sortable={false} cellClassName={classes.fields} />
                 <TextField source="dpi" style={{ color: 'black', fontFamily: 'Gothic' }} label="DPI" sortable={false} cellClassName={classes.fields} />
               </Datagrid>
@@ -41,7 +41,8 @@ const VisitsList = (props) => {
             <List empty={false} {...props} style={{ width: '100%' }} actions={<ListActions small={isSmall} />} bulkActionButtons={false} pagination={<PostPagination />}>
               <Datagrid {...props} rowClick="show" optimized style={{ textAlign: 'center' }}>
                 <TextField source="name" style={{ color: 'black', fontFamily: 'Gothic' }} label="Visita" sortable={false} cellClassName={classes.fields} />
-                <TextField source="phone" style={{ color: 'black', fontFamily: 'Gothic' }} label="Telefono" sortable={false} cellClassName={classes.fields} />
+                <TextField source="profile.name" style={{ color: 'black', fontFamily: 'Gothic' }} label="Vecino" sortable={false} cellClassName={classes.fields} />
+                <TextField source="profile.address" style={{ color: 'black', fontFamily: 'Gothic' }} label="Dirección" sortable={false} cellClassName={classes.fields} />
                 <DateField source="date" style={{ color: 'black', fontFamily: 'Gothic' }} label="Fecha" sortable={false} cellClassName={classes.fields} />
                 <TextField source="dpi" style={{ color: 'black', fontFamily: 'Gothic' }} label="DPI" sortable={false} cellClassName={classes.fields} />
               </Datagrid>

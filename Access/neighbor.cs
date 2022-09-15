@@ -15,13 +15,6 @@ namespace neighborhood
     {
         IRepository<Visits> _RepositoryVisits;
         IRepository<Profile> _RepositoryProfile;
-        string bloburl;
-        string blobname;
-        string PublicKey;
-        string PrivateKey;
-        string twiliouser;
-        string twiliopassword;
-        string twilionumber;
         string baseUrl;
         RazorViewToStringRenderer _RazorViewToStringRenderer;
         public neighbor(IRepository<Visits> repositoryVisits, IConfiguration configuration, 
@@ -55,8 +48,6 @@ namespace neighborhood
                 };
 
                 var htmlContent = await _RazorViewToStringRenderer.RenderViewToStringAsync(templateModel);
-
-
                 var response = new HttpResponseMessage(HttpStatusCode.OK);
                 response.Content = new StringContent(htmlContent);
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");

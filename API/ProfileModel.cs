@@ -22,7 +22,11 @@ namespace neighborhood
 
         [JsonPropertyName("phone")]
         public string Phone { get; set; }
+
         [JsonPropertyName("enable")]
         public bool Enable { get; set; }
+
+        [JsonPropertyName("admin")]
+        public bool Admin { get; set; }
     }
 }
